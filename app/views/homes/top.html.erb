@@ -1,0 +1,144 @@
+<div class="container text-center">
+  <p class="text-success"><%= flash[:notice] %></p>
+  <div class="row">
+    <div class="col-md-7 mx-auto mt-5 py-4 bg-light">
+      <p>洋菓子「モロゾフ」の通販サイトです。</p>
+      <p>会員でない方も商品の閲覧はできますが、購入には会員登録が必要になります。</p>
+    </div>
+  </div>
+</div>
+
+<section class="gallery" id="galleryTop">
+  <div class="gallery_adjust">
+    <h2 class="gallery_ttl">PRODUCTS</h2>
+
+    <div class="swiper gallerySwiper">
+      <div class="swiper-wrapper">
+
+        <div class="swiper-slide">
+          <div class="swiper-slide_wrap">
+            <a href="#" class="text-decoration-none" style="pointer-events: none;">
+              <%= image_tag "product01.jpeg" %>
+              <h3 class="swiper-slide_wrap_lead">ケーキ</h3>
+              <p class="swiper-slide_wrap_txt">
+                <span>CAKE</span>
+                <br>モロゾフを代表するロングセラー商品「デンマーククリームチーズケーキ」や、なめらかな食感、優しい甘さで人気の「レアチーズケーキ」。<br>その他、今だからこそ食べたい季節限定のケーキをここではご紹介いたします。
+              </p>
+            </a>
+          </div>
+        </div>
+
+        <div class="swiper-slide">
+          <div class="swiper-slide_wrap">
+            <a href="#" class="text-decoration-none" style="pointer-events: none;">
+              <%= image_tag "product02.jpeg" %>
+              <h3 class="swiper-slide_wrap_lead">サマーデザート</h3>
+              <p class="swiper-slide_wrap_txt">
+                <span>SUMMER DESSERT</span>
+                <br>彩りも鮮やかなみずみずしい「ファンシーデザート」や食感を自由にアレンジ出来る「凍らせてシャーベット」、果実を閉じ込めた「フルーツ オブ フルーツ」。<br>モロゾフで人気の夏デザートをここではご紹介いたします。
+              </p>
+            </a>
+          </div>
+        </div>
+
+        <div class="swiper-slide">
+          <div class="swiper-slide_wrap">
+            <a href="#" class="text-decoration-none" style="pointer-events: none;">
+              <%= image_tag "product03.jpeg" %>
+              <h3 class="swiper-slide_wrap_lead">プリン・ゼリー</h3>
+              <p class="swiper-slide_wrap_txt">
+                <span>PUDDING & JELLY</span>
+                <br>長く愛され続けている、モロゾフ人気の「カスタードプリン」をはじめ、旬の美味しさが詰まった季節限定のプリン、ゼリーをここではご紹介いたします。
+              </p>
+            </a>
+          </div>
+        </div>
+
+        <div class="swiper-slide">
+          <div class="swiper-slide_wrap">
+            <a href="#" class="text-decoration-none" style="pointer-events: none;">
+              <%= image_tag "product04.jpeg" %>
+              <h3 class="swiper-slide_wrap_lead">クッキー</h3>
+              <p class="swiper-slide_wrap_txt">
+                <span>COOKIE</span>
+                <br>モロゾフを代表するアルカディアを始め、<br>さまざまな味わいや食感にこだわったクッキーをご紹介いたします。
+              </p>
+            </a>
+          </div>
+        </div>
+
+        <div class="swiper-slide">
+          <div class="swiper-slide_wrap">
+            <a href="#" class="text-decoration-none" style="pointer-events: none;">
+              <%= image_tag "product05.jpeg" %>
+              <h3 class="swiper-slide_wrap_lead">フローズンスイート</h3>
+              <p class="swiper-slide_wrap_txt">
+                <span>FROZEN SWEETS</span>
+                <br>チョコレートコーティングした一口サイズのロングセラー「グラス オ ショコラ」をはじめ、<br>バラエティ豊かなラインナップをご紹介いたします。
+              </p>
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="detail">
+      <%= link_to "もっと見る", items_path, class: 'detail_btn' %>
+    </div>
+  </div>
+</section>
+
+<section class="info" id="infoTop">
+  <div class="info_wrap">
+    <div class="info_wrap_inner">
+      <h2 class="info_wrap_inner_ttl h2_left">NEWS</h2>
+      <div class="info_wrap_inner_list">
+        <ul>
+          <a class="text-decoration-none">
+            <li class="list_item">
+              <div class="list_item_date">2023.04.10</div>
+              <div class="list_item_txt">『CUSTA』期間限定SHOPが伊勢丹新宿店にOPEN</div>
+            </li>
+          </a>
+          <a class="text-decoration-none">
+            <li class="list_item">
+              <div class="list_item_date">2022.10.05</div>
+              <div class="list_item_txt">新ブランド「FEUILLAGE」10月5日（水）より大丸東京店にて期間限定出店</div>
+            </li>
+          </a>
+          <a class="text-decoration-none">
+            <li class="list_item">
+              <div class="list_item_date">2022.04.01</div>
+              <div class="list_item_txt">「ロイヤルクリームチーズケーキ」がよりコク深く、なめらかにリニューアル</div>
+            </li>
+          </a>
+          <a class="text-decoration-none">
+            <li class="list_item">
+              <div class="list_item_date">2021.10.29</div>
+              <div class="list_item_txt">新発売「バターリッチプリン」期間限定販売のお知らせ</div>
+            </li>
+          </a>
+          <a class="text-decoration-none">
+            <li class="list_item">
+              <div class="list_item_date">2021.08.05</div>
+              <div class="list_item_txt">【銀座三越限定】「ガレット オ ブール」開店1周年記念商品 販売のお知らせ</div>
+            </li>
+          </a>
+          <a class="text-decoration-none">
+            <li class="list_item">
+              <div class="list_item_date">2021.05.20</div>
+              <div class="list_item_txt">【小田急百貨店限定】「新茶のプリン」期間限定販売のお知らせ　2021年5月26日（水）～6月8日（火）</div>
+            </li>
+          </a>
+          <a class="text-decoration-none">
+            <li class="list_item">
+              <div class="list_item_date">2019.04.26</div>
+              <div class="list_item_txt">2019 こどもの日限定チーズケーキ販売のお知らせ　2019年5月1日（水）～5月5日（日）</div>
+            </li>
+          </a>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>

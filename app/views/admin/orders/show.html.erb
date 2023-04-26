@@ -1,0 +1,100 @@
+<div class="container">
+  <h2>注文履歴詳細</h2>
+
+  <div class="row">
+    <div class="col-3 mt-3 blank_fix">
+
+      <div class="user-name my-3">
+        <label class="h5">購入者：</label>
+        <%= @order.end_user.last_name %>  <%= @order.end_user.first_name %>
+      </div>
+
+      <div class="shipping my-3">
+        <label class="h5">配送先：</label>
+        <%= "〒" + @order.postal_code %>
+        <%= @order.address %>
+      </div>
+
+      <div class="payment my-3">
+        <label class="h5">お支払い方法：</label>
+        <%= @order.payment_method_i18n %>
+      </div>
+
+      <div class="order-status">
+        <label class="h5">注文ステータス</label>
+        <!--注文ステータス-->
+        <!--プルダウン表記でステータスを変更-->
+        <%= form_with model: @order, url: admin_order_path(@order.id), method: :patch, local: true do |f| %>
+          <%#= f.select :order_status, { pay_waiting: 0, pay_confirm: 1, on_making: 2, ship_preparing: 3, completed: 4 }, include_blank: "選択して下さい" %>
+          <%#= f.select :order_status, Order.order_statuses.keys.map{|k| [I18n.t("enums.order.order_status.#{k}"), k]} %>
+          <%= f.select :order_status, Order.order_statuses.keys.map %>
+          <%= f.submit "更新" %>
+        <% end %>
+      </div>
+
+      <div class="return mt-4">
+        <%= link_to "注文履歴一覧へ戻る", admin_orders_path, class: 'text-primary' %>
+      </div>
+
+    </div>
+
+    <div class="col-6 offset-3 blank_fix">
+
+      <table class="table mb-5">
+        <thead>
+          <tr>
+            <th>商品名</th>
+            <th>単価(税込)</th>
+            <th>数量</th>
+            <th>小計</th>
+            <th>製作ステータス</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @sum = 0 %>
+          <% @order_details.each do |order_detail| %>
+            <tr>
+              <td>
+                <%= order_detail.item.item_name %>
+              </td>
+              <td>
+                <%= (order_detail.item.non_taxed_price * 1.1).round %>
+              </td>
+              <td>
+                <%= order_detail.amount %>
+              </td>
+              <td><%= (order_detail.item.non_taxed_price * 1.1).round * order_detail.amount %></td>
+              <td>
+                <!--製作ステータス-->
+                <!--プルダウン表記でステータスを変更-->
+                <%= form_with model: order_detail, url: admin_order_detail_path(order_detail.id), method: :patch, local: true do |f| %>
+                  <%#= f.select :making_status, { unable: 0, make_waiting: 1, making: 2, completed: 3 }, include_blank: "選択して下さい" %>
+                  <%#= f.select :making_status, OrderDetail.making_statuses.keys.map{|k| [I18n.t("enums.order_detail.making_status.#{k}"), k]} %>
+                  <%= f.select :making_status, OrderDetail.making_statuses.keys.map %>
+                  <%= f.submit "更新" %>
+                <% end %>
+              </td>
+              <% @sum += (order_detail.item.non_taxed_price * 1.1).round * order_detail.amount %>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+
+      <table class="table">
+        <tr>
+          <td>商品合計</td>
+          <td><%= @sum %>円</td>
+        </tr>
+        <tr>
+          <td>送料</td>
+          <td>800円</td>
+        </tr>
+        <tr>
+          <td>請求金額合計</td>
+          <td><%= @sum + 800.to_i %>円</td>
+        </tr>
+      </table>
+    </div>
+
+  </div>
+</div>

@@ -1,0 +1,37 @@
+<div class="container">
+  <div class="row">
+    <div class="col-8">
+
+      <h2>商品詳細</h2>
+      <table class="table">
+        <tr>
+          <td><%= attachment_image_tag @item, :image, size: '80x60', fallback: 'no_image.jpeg' %></td>
+          <td><%= @item.item_name %></td>
+          <td><%= @item.description %></td>
+          <td>¥<%= (@item.non_taxed_price * 1.1).round %>  (税込)</td>
+          <td>
+            <% if @item.sale_status == true %>
+              <span class="text-success">販売中</span>
+            <% else %>
+              <span class="text-danger">売り切れ</span>
+            <% end %>
+          </td>
+        </tr>
+      </table>
+
+      <% if @item.sale_status == true %>
+        <%= form_with model: @cart_item, local: true do |f| %>
+          <%= f.hidden_field :end_user_id, value: current_end_user.id %>
+          <%= f.hidden_field :item_id, value: @item.id %>
+          <%= f.number_field :amount, min: 1, value: 1 %>
+          <br><br>
+          <%= f.submit "カートに入れる" %>
+          <br><br>
+        <% end %>
+      <% else %>
+        <p>只今、在庫切れのため、カートに入れることはできません。</p>
+      <% end %>
+      <%= link_to "商品一覧へ戻る", items_path, class: 'text-primary' %>
+    </div>
+  </div>
+</div>

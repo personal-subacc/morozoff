@@ -1,0 +1,23 @@
+<div class="container">
+  <div class="row">
+    <div class="col-3">
+
+      <h2>ジャンル編集</h2>
+      <%= render 'layouts/errors', obj: @genre %>
+
+      <%= form_with model: @genre, url: admin_genre_path(@genre.id), local: true do |f| %>
+        <label>ジャンル</label>
+        <%= f.text_field :name, class: 'form-control' %>
+        <label><%= f.radio_button :is_active, "true" %>有効</label>
+        <label><%= f.radio_button :is_active, "false" %>無効</label>
+        <br>
+        <%= f.submit "変更を保存する", class: 'px-2' %>
+      <% end %>
+
+      <div class="return mt-4">
+        <%= link_to "ジャンル一覧へ戻る", admin_genres_path, class: 'text-primary' %>
+      </div>
+
+    </div>
+  </div>
+</div>

@@ -1,0 +1,4 @@
+{
+  "editor.formatOnSave": true,
+  "[ruby]": { "editor.defaultFormatter": 	"jnbt.vscode-rufo" }
+}

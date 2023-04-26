@@ -1,0 +1,53 @@
+<div class="container">
+  <h2>注文履歴一覧</h2>
+
+  <div class="row">
+    <div class="col-9">
+
+      <table class="table">
+        <thead>
+          <tr>
+            <th>購入日時</th>
+            <th>購入者</th>
+            <th>注文個数</th>
+            <th>注文ステータス</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @orders.each do |order| %>
+            <tr>
+              <td>
+                <!--注文日時(日本時間)  詳細へのリンク付き-->
+                <%= link_to admin_order_path(order.id), class: 'text-primary' do %>
+                  <%#= order.created_at.strftime("%Y/%m/%d %H:%M:%S") %>
+                  <%# 保守・運用の観点からlメソッドでDRYなコードに変更 %>
+                  <%= l order.created_at, format: :short %>
+                <% end %>
+              </td>
+              <td>
+                <!--購入したエンドユーザのフルネーム-->
+                <%= order.end_user.last_name %>  <%= order.end_user.first_name %>
+              </td>
+
+              <% @sum = 0 %>
+
+              <% order.order_details.each do |order_detail| %>
+                <% @sum += order_detail.amount %>
+              <% end %>
+
+              <td>
+                <!--注文個数(注文した商品の個数合計)-->
+                <%= @sum %>
+              </td>
+              <td>
+                <!--注文ステータス-->
+                <%= order.order_status_i18n %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+
+    </div>
+  </div>
+</div>

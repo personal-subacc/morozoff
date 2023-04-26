@@ -1,0 +1,21 @@
+<div class="container">
+  <div class="row">
+    <div class="col-12 text-center">
+      <h2>レシピ検索</h2>
+      <%= form_tag({controller:"edamams",action:"index"}, method: :get) do %>
+        <p>英語で検索してください</p>
+        <%= text_field_tag :search %> <br>
+        <%= submit_tag '検索する', class: 'my-3 px-3 bg-success text-light'  %>
+      <% end %>
+    </div>
+  </div>
+  <div class="row mx-auto">
+    <% @foods["hits"].first(12).each do |recipe| %>
+      <div class="col-lg-3 col-md-4 col-sm-12 offset-1 my-5">
+        <%= image_tag recipe["recipe"]["image"] %> <br>
+        <%= link_to recipe["recipe"]["label"], recipe["recipe"]["url"], class: 'text-primary' %> <br>
+        <%= recipe["recipe"]["calories"].ceil %>cal <br>
+      </div>
+    <% end %>
+  </div>
+</div>

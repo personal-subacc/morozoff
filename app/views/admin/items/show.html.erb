@@ -1,0 +1,38 @@
+<div class="container">
+  <div class="row">
+    <div class="col-9">
+
+      <h2>商品詳細</h2>
+      <p class="text-success"><%= flash[:notice] %></p>
+      <br>
+      <table class="table">
+        <tr>
+          <td>商品画像</td>
+          <td>商品名</td>
+          <td>商品説明</td>
+          <td>ジャンルID</td>
+          <td>値段(税抜き)</td>
+          <td>販売状況</td>
+        </tr>
+        <tr>
+          <td><%= attachment_image_tag @item, :image, size: '80x60', fallback: 'no_image.jpeg' %></td>
+          <td><%= @item.item_name %></td>
+          <td><%= @item.description %></td>
+          <td><%= @item.genre_id %></td>
+          <td><%= @item.non_taxed_price %></td>
+
+          <% if @item.sale_status == true %>
+            <td class="text-success">販売中</td>
+          <% else %>
+            <td class="text-danger">売り切れ</td>
+          <% end %>
+        </tr>
+      </table>
+
+      <%= link_to "商品一覧へ戻る", admin_items_path, class: 'text-primary' %>
+      <%= link_to "商品を編集する", edit_admin_item_path(@item.id), class: 'ml-5 text-success' %>
+      <%= link_to "商品を削除する", admin_item_path(@item.id), method: :delete, "data-confirm" => "本当に削除しますか？", class: 'ml-5 text-danger' %>
+
+    </div>
+  </div>
+</div>

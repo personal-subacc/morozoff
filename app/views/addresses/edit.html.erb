@@ -1,0 +1,24 @@
+<div class="container">
+  <h2>配送先編集</h2>
+  <div class="row">
+    <div class="col-4">
+      <%= render 'layouts/errors', obj: @address %>
+
+      <%= form_with model: @address, local: true do |f| %>
+        <label>宛名</label>
+        <%= f.text_field :name, class: 'form-control' %>
+        <label>配送先郵便番号</label>
+        <%= f.text_field :postal_code, class: 'form-control' %>
+        <label>配送先住所</label>
+        <%= f.text_field :address, class: 'form-control' %>
+        <br>
+        <%= f.submit "更新する", class: 'px-2' %>
+      <% end %>
+
+      <div class="return mt-4">
+        <%= link_to "配送先一覧へ戻る", addresses_path, class: 'text-primary' %>
+      </div>
+      
+    </div>
+  </div>
+</div>

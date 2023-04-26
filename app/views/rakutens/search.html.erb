@@ -1,0 +1,26 @@
+<div class="container">
+  <div class="row">
+    <div class="col-9">
+
+      <h4>楽天で商品を探す</h4>
+      <div class="search-box">
+        <%= form_with url: rakutens_search_path, method: :get, local: true do |f| %>
+          <div class="form-group">
+            <%= f.text_field :keyword, value: params[:keyword], placeholder: '例）morozoff プリン', class: "my-3", required: true %>
+            <%= f.submit '製品名を検索', class: "btn btn-success px-3 ml-2" %>
+          </div>
+        <% end %>
+        <% if @items.present? %>
+          <% @items.first(10).each do |item| %>
+            <div class="list-group mb-5">
+              <%= image_tag (item['mediumImageUrls'][0]), size: '130x100', class: 'mb-3' %>
+              <%= link_to item.name, "#{item.url}", class: 'text-primary' %>
+              <%= number_with_delimiter(item.price) %>円
+            </div>
+          <% end %>
+        <% end %>
+      </div>
+
+    </div>
+  </div>
+</div>

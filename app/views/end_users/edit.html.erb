@@ -1,0 +1,50 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-4">
+
+      <h2>登録編集情報</h2>
+      <%= render 'layouts/errors', obj: @end_user %>
+
+      <%= form_with model: @end_user, local: true do |f| %>
+
+        <div class="my-5">
+          <label class="text-info font-weight-bold h4">名前</label><br>
+          姓　<%= f.text_field :last_name, autofocus: true, class: 'mb-2 form-control' %><br>
+          名　<%= f.text_field :first_name, autofocus: true, class: 'mb-2 form-control' %>
+        </div>
+
+        <div class="my-5">
+          <label class="text-info font-weight-bold h4">フリガナ</label><br>
+          セイ　<%= f.text_field :last_name_kana, autofocus: true, class: 'mb-2 form-control' %><br>
+          メイ　<%= f.text_field :first_name_kana, autofocus: true, class: 'mb-2 form-control' %>
+        </div>
+
+        <div class="my-5">
+          <label class="text-info font-weight-bold h4">郵便番号（ハイフンなし）</label><br>
+          <%= f.text_field :postal_code, autofocus: true, class: 'mb-2 form-control' %><br>
+        </div>
+
+        <div class="my-5">
+          <label class="text-info font-weight-bold h4">住所</label><br>
+          <%= f.text_field :address, autofocus: true, class: 'mb-2 form-control' %><br>
+        </div>
+
+        <div class="my-5">
+          <label class="text-info font-weight-bold h4">電話番号（ハイフンなし）</label><br>
+          <%= f.telephone_field :phone_number, autofocus: true, class: 'mb-2 form-control' %><br>
+        </div>
+
+        <div class="my-5">
+          <label class="text-info font-weight-bold h4">メールアドレス</label><br>
+          <%= f.text_field :email, autofocus: true, class: 'mb-2 form-control' %><br>
+        </div>
+
+        <%= f.submit "編集内容を保存する", class: 'py-1' %>
+
+      <% end %>
+
+      <%= link_to "退会する", quit_confirm_end_user_path(@end_user.id), class: 'btn btn-danger btn-sm mt-5' %>
+
+    </div>
+  </div>
+</div>

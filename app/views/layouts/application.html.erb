@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>洋菓子のモロゾフ:チョコレート・プリン・チーズケーキ|モロゾフ株式会社公式サイト</title>
+    <meta name="description" content="チョコレート、プリン、チーズケーキをはじめとする「洋菓子のモロゾフ」。人気のプリンやケーキといった洋菓子のほか、キャンペーンや店舗など、モロゾフに関する情報を紹介します。">
+
+    <%# インデックス無効化 %>
+    <meta name='robots' content='noindex,follow'>
+    <%# ファビコン指定 %>
+    <%= favicon_link_tag('morozoff') %>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%# swiper.css読み込み(CDN) %>
+    <link rel="stylesheet" href="https://unpkg.com/swiper@8/swiper-bundle.min.css" media="print" onload="this.media='all'">
+    <%# extra.css読み込み %>
+    <link rel="stylesheet" type="text/css" href="/assets/stylesheets/extra.scss">
+  </head>
+
+  <body>
+    <header>
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark py-4 mb-4">
+
+        <% if end_user_signed_in? %>
+          <%= link_to "morozoff", root_path, class: 'font-weight-bold text-light' %>
+        <% elsif admin_signed_in? %>
+          <%= link_to "morozoff", admin_path, class: 'font-weight-bold text-light' %>
+        <% else %>
+          <%= link_to "morozoff", root_path, class: 'font-weight-bold text-light' %>
+        <% end %>
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#drop">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="drop">
+          <ul class="navbar-nav ml-auto">
+
+            <% if end_user_signed_in? %>
+              <li>
+                <%= link_to "マイページ", end_user_path(current_end_user.id), class: 'mr-4 text-light' %>
+              </li>
+              <li>
+                <%= link_to "商品一覧", items_path, class: 'mr-4 text-light' %>
+              </li>
+              <li>
+                <%= link_to "カート", cart_items_path, class: 'mr-4 text-light' %>
+              </li>
+              <li>
+                <%= link_to "アレンジレシピ", recipes_path, class: 'mr-4 text-light' %>
+              </li>
+              <li>
+                <%= link_to "楽天で商品検索", rakutens_search_path, class: 'mr-4 text-light' %>
+              </li>
+              <li>
+                <%= link_to 'ログアウト', destroy_end_user_session_path, method: :delete, class: 'mr-4 text-light' %>
+              </li>
+            <% elsif admin_signed_in? %>
+              <li class="mr-5">
+                <%= form_tag(admin_items_path, :method => 'get') do %>
+                  <%= text_field_tag :search %>
+                  <%= submit_tag 'Search', :item_name => nil %>
+                <% end %>
+              </li>
+              <li>
+                <%= link_to "商品一覧", admin_items_path, class: 'mr-4 text-light' %>
+              </li>
+              <li>
+                <%= link_to "会員一覧", admin_end_users_path, class: 'mr-4 text-light' %>
+              </li>
+              <li>
+                <%= link_to "注文履歴一覧", admin_orders_path, class: 'mr-4 text-light' %>
+              </li>
+              <li>
+                <%= link_to "ジャンル一覧", admin_genres_path, class: 'mr-4 text-light' %>
+              </li>
+              <li>
+                <%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class: 'mr-4 text-light' %>
+              </li>
+            <% else %>
+              <li>
+                <%= link_to 'モロゾフとは', about_path, class: 'mr-4 text-light' %>
+              </li>
+              <li>
+                <%= link_to '商品一覧', items_path, class: 'mr-4 text-light' %>
+              </li>
+              <li>
+                <%= link_to "アレンジレシピ", recipes_path, class: 'mr-4 text-light' %>
+              </li>
+              <li>
+                <%= link_to "楽天で商品検索", rakutens_search_path, class: 'mr-4 text-light' %>
+              </li>
+              <li>
+                <%= link_to 'サインアップ', new_end_user_registration_path, class: 'mr-4 text-light' %>
+              </li>
+              <li>
+                <%= link_to 'ログイン', new_end_user_session_path, class: 'mr-4 text-light' %>
+              </li>
+            <% end %>
+
+          </ul>
+        </div>
+      </nav>
+    </header>
+
+    <main>
+      <%= yield %>
+    </main>
+
+    <footer>
+      <div class='container mt-5'>
+        <div class='row'>
+          <div class='mx-auto'>
+            <p class="small text-center text-muted">&copy; 2020  morozoff  All Rights Reserved.</p>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <%# gsap読み込み（CDN） %>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.10.4/gsap.min.js"></script>
+    <%# anime.js読み込み（CDN） %>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/2.2.0/anime.min.js"></script>
+    <%# swiper.js読み込み(CDN) %>
+    <script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
+    <%# extra.js読み込み %>
+    <script type="text/javascript" src="/assets/javascripts/extra.js"></script>
+  </body>
+</html>

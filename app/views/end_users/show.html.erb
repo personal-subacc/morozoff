@@ -1,0 +1,49 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-6">
+
+      <h2>マイページ</h2>
+      <p class="text-success"><%= flash[:notice] %></p>
+      <p class="text-success"><%= flash[:welcome] %></p>
+
+      <h4 class="my-4">登録情報</h4>
+      <table class="table">
+        <tr>
+          <td>氏名</td>
+          <td><%= @end_user.last_name %>  <%= @end_user.first_name %></td>
+        </tr>
+        <tr>
+          <td>カナ</td>
+          <td><%= @end_user.last_name_kana %>  <%= @end_user.first_name_kana %></td>
+        </tr>
+        <tr>
+          <td>郵便番号</td>
+          <td><%= @end_user.postal_code %></td>
+        </tr>
+        <tr>
+          <td>住所</td>
+          <td><%= @end_user.address %></td>
+        </tr>
+        <tr>
+          <td>電話番号</td>
+          <td><%= @end_user.phone_number %></td>
+        </tr>
+        <tr>
+          <td>メールアドレス</td>
+          <td><%= @end_user.email %></td>
+        </tr>
+      </table>
+      <%= link_to "編集する", edit_end_user_path(current_end_user.id), class: 'btn btn-success' %>
+
+      <div class="shipping my-5">
+        <h4>配送先</h4>
+        <%= link_to "配送先一覧", addresses_path, class: 'text-primary' %>
+      </div>
+      <div class="order-history my-5">
+        <h4>注文履歴</h4>
+        <%= link_to "注文履歴を確認する", orders_path, class: 'text-primary' %>
+      </div>
+
+    </div>
+  </div>
+</div>

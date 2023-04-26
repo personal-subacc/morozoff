@@ -1,0 +1,31 @@
+<div class="container">
+  <div class="row">
+    <div class="col-4">
+
+      <h2 class="mb-4">商品新規登録</h2>
+      <%= render 'layouts/errors', obj: @item %>
+
+      <%= form_with model: @item, url: '/admin/items', local: true, method: :post do |f| %>
+        <label>商品画像</label><br>
+        <%= f.attachment_field :image %><br><br>
+        <label>商品名</label><br>
+        <%= f.text_field :item_name, class: 'form-control' %><br>
+        <label>商品説明</label><br>
+        <%= f.text_area :description, class: 'form-control' %><br>
+        <label>ジャンルID</label><br>
+        <%= f.collection_select :genre_id, Genre.all, :id, :name, include_blank: "選択してください" %><br></br>
+        <label>値段(税抜き)</label><br>
+        <%= f.number_field :non_taxed_price, min: 1, class: 'form-control' %><br>
+        <label><%= f.radio_button :sale_status, :true %>販売中</label>
+        <label><%= f.radio_button :sale_status, :false %>売り切れ</label>
+        <br>
+        <%= f.submit "新規登録" %>
+      <% end %>
+
+      <div class="return mt-4">
+        <%= link_to "商品一覧へ戻る", admin_items_path, class: 'text-primary' %>
+      </div>
+
+    </div>
+  </div>
+</div>

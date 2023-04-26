@@ -1,0 +1,71 @@
+<div class="container">
+  <div class="row">
+    <div class="col-9">
+
+      <h2>ショッピングカート</h2>
+      <p class="text-danger"><%= flash[:alert] %></p>
+
+      <% unless @cart_items.empty? %>
+        <div class="all-empty my-4">
+          <%= link_to "カートを空にする", destroy_all_cart_items_path, method: :delete, 'data-confirm' => '空にしますか？', class: 'text-danger' %>
+        </div>
+      <% end %>
+
+      <% if @cart_items.empty? %>
+        <p>現在、カートに商品は入っておりません。</p>
+      <% else %>
+        <table class="table">
+          <thead>
+            <tr>
+              <th></th>
+              <th>商品名</th>
+              <th>単価（税込）</th>
+              <th>数量</th>
+              <th>小計</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @sum = 0 %>
+            <% @cart_items.each do |cart_item| %>
+              <tr>
+                <td>
+                  <%= attachment_image_tag cart_item.item, :image, size: '80x60', fallback: 'no_image.jpeg' %>
+                </td>
+                <td>
+                  <%= cart_item.item.item_name %>
+                </td>
+                <td>
+                  <%= (cart_item.item.non_taxed_price*1.1).round %>
+                </td>
+                <td>
+                  <%= form_with model: cart_item, local: true do |f| %>
+                    <%= f.number_field :amount, min: 1 %>
+                    <%= f.submit "編集" %>
+                  <% end %>
+                </td>
+                <td>
+                  <%= (cart_item.item.non_taxed_price * 1.1).round * cart_item.amount %>
+                </td>
+                <td>
+                  <%= link_to "削除", cart_item_path(cart_item.id), method: :delete, class: 'text-danger' %>
+                </td>
+                <% @sum += (cart_item.item.non_taxed_price * 1.1).round * cart_item.amount %>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      <% end %>
+
+      <% unless @cart_items.empty? %>
+        <div class="sum my-5">
+          <h4>合計金額  <%= @sum %>円</h4>
+        </div>
+        <%= link_to "レジに進む", new_order_path, class: 'btn btn-primary' %>
+      <% end %>
+      
+      <%= link_to "買い物を続ける", items_path, class: 'btn btn-success' %>
+
+    </div>
+  </div>
+</div>

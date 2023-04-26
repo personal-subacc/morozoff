@@ -1,0 +1,45 @@
+<div class="container">
+  <div class="row">
+    <div class="col-9">
+
+      <h2>注文情報入力</h2>
+      <%= form_with model: @order, url: confirm_orders_path, local: true do |f| %>
+        <div class="payment mt-4">
+          <h4>お支払い方法</h4>
+          <%= f.radio_button :payment_method, :クレジットカード %>
+          <%= f.label :payment_method, "クレジットカード" %><br>
+          <%= f.radio_button :payment_method, :銀行振り込み %>
+          <%= f.label :payment_method, "銀行振込" %>
+        </div>
+
+        <div class="address mt-4">
+          <h4>お届け先</h4>
+          <div class="0">
+            <%= f.radio_button :address_option, 0, checked: "checked" %>
+            <%= f.label :address, "ご自身の住所" %>
+            <%= "〒" + current_end_user.postal_code %>
+            <%= current_end_user.address %>
+            <%= current_end_user.last_name + current_end_user.first_name %>
+          </div>
+          <div class="1">
+            <div>
+              <%= f.radio_button :address_option, 1 %>
+              <%= f.label :address, "登録済住所から選択" %>
+              <%#= f.collection_select :address_id, current_end_user.addresses, :id, :full_address, include_blank: "選択して下さい" %>
+              <%= collection_select :address, :id, current_end_user.addresses, :id, :full_address, include_blank: "選択して下さい" %>
+            </div>
+          </div>
+        </div>
+
+        <div class="submit mt-3">
+          <%= link_to "新たに配送先を登録する", addresses_path, class: 'btn btn-secondary' %>
+        </div>
+
+        <div class="submit mt-3">
+          <%= f.submit "確認画面へ進む", class: 'btn btn-success' %>
+        </div>
+      <% end %>
+
+    </div>
+  </div>
+</div>

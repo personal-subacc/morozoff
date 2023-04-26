@@ -1,0 +1,43 @@
+<div class="container">
+  <div class="row">
+    <div class="col-9">
+
+      <h2>商品一覧  全<%= @items.count %>件</h2>
+      <table class="table">
+        <% @items.each do |item| %>
+          <tr>
+            <td>
+              <%= link_to item.genre.name, items_path(:search_key => item.genre_id), class: 'text-secondary' %>
+              <!--hoge_path(:キー => "値")-->
+            </td>
+            <td>
+              <%= attachment_image_tag item, :image, size: '80x60', fallback: 'no_image.jpeg' %>
+            </td>
+            <td>
+              <%= item.item_name %>
+            </td>
+            <td>
+              <%= item.description %>
+            </td>
+            <td>
+              ￥<%= (item.non_taxed_price * 1.1).round %>  (税込)
+            </td>
+            <td>
+              <% if item.sale_status == true %>
+                <span class="text-success">販売中</span>
+              <% else %>
+                <span class="text-danger">売り切れ</span>
+              <% end %>
+            </td>
+            <% if end_user_signed_in? %>
+              <td>
+                <%= link_to "詳細へ", item_path(item.id), class: 'text-primary' %>
+              </td>
+            <% end %>
+          </tr>
+        <% end %>
+      </table>
+
+    </div>
+  </div>
+</div>
